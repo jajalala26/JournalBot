@@ -1,0 +1,556 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ]
+  },
+  "nluManager": {
+    "settings": {},
+    "languages": [
+      "en"
+    ],
+    "intentDomains": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "language": "en",
+          "useNoneFeature": true,
+          "config": {
+            "activation": "leaky-relu",
+            "hiddenLayers": [],
+            "iterations": 20000,
+            "learningRate": 0.7,
+            "errorThresh": 0.00005,
+            "momentum": 0.5,
+            "deltaErrorThresh": 0.000001,
+            "maxDecimals": 9,
+            "leakyReluAlpha": 0.08,
+            "timeout": 120000
+          }
+        },
+        "language": "en",
+        "nluClassName": "BrainNLU",
+        "useMasterDomain": true,
+        "trainByDomain": false,
+        "keepStopwords": true,
+        "stemDict": {
+          "feel,great,i": {
+            "domain": "default",
+            "intent": "emotions.positive"
+          },
+          "am,happi,i,now,right,so": {
+            "domain": "default",
+            "intent": "emotions.positive"
+          },
+          "amaz,is,this": {
+            "domain": "default",
+            "intent": "emotions.positive"
+          },
+          "excit,i,m": {
+            "domain": "default",
+            "intent": "emotions.positive"
+          },
+          "glad,i,m,so": {
+            "domain": "default",
+            "intent": "emotions.positive"
+          },
+          "feel,i,terribl": {
+            "domain": "default",
+            "intent": "emotions.negative"
+          },
+          "down,feel,i,m": {
+            "domain": "default",
+            "intent": "emotions.negative"
+          },
+          "frustrat,is,so,this": {
+            "domain": "default",
+            "intent": "emotions.negative"
+          },
+          "angri,i,m,so": {
+            "domain": "default",
+            "intent": "emotions.negative"
+          },
+          "i,m,realli,upset": {
+            "domain": "default",
+            "intent": "emotions.negative"
+          },
+          "for,goodby,now": {
+            "domain": "default",
+            "intent": "greetings.bye"
+          },
+          "bye,bye,care,take": {
+            "domain": "default",
+            "intent": "greetings.bye"
+          }
+        },
+        "intentDict": {
+          "emotions.positive": "default",
+          "emotions.negative": "default",
+          "greetings.bye": "default"
+        },
+        "useStemDict": true,
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "language": "en",
+              "useNoneFeature": true,
+              "config": {
+                "activation": "leaky-relu",
+                "hiddenLayers": [],
+                "iterations": 20000,
+                "learningRate": 0.7,
+                "errorThresh": 0.00005,
+                "momentum": 0.5,
+                "deltaErrorThresh": 0.000001,
+                "maxDecimals": 9,
+                "leakyReluAlpha": 0.08,
+                "timeout": 120000
+              }
+            },
+            "language": "en",
+            "keepStopwords": true,
+            "docs": [
+              {
+                "intent": "emotions.positive",
+                "tokens": [
+                  "i",
+                  "feel",
+                  "great"
+                ]
+              },
+              {
+                "intent": "emotions.positive",
+                "tokens": [
+                  "i",
+                  "am",
+                  "so",
+                  "happi",
+                  "right",
+                  "now"
+                ]
+              },
+              {
+                "intent": "emotions.positive",
+                "tokens": [
+                  "this",
+                  "is",
+                  "amaz"
+                ]
+              },
+              {
+                "intent": "emotions.positive",
+                "tokens": [
+                  "i",
+                  "m",
+                  "excit"
+                ]
+              },
+              {
+                "intent": "emotions.positive",
+                "tokens": [
+                  "i",
+                  "m",
+                  "so",
+                  "glad"
+                ]
+              },
+              {
+                "intent": "emotions.negative",
+                "tokens": [
+                  "i",
+                  "feel",
+                  "terribl"
+                ]
+              },
+              {
+                "intent": "emotions.negative",
+                "tokens": [
+                  "i",
+                  "m",
+                  "feel",
+                  "down"
+                ]
+              },
+              {
+                "intent": "emotions.negative",
+                "tokens": [
+                  "this",
+                  "is",
+                  "so",
+                  "frustrat"
+                ]
+              },
+              {
+                "intent": "emotions.negative",
+                "tokens": [
+                  "i",
+                  "m",
+                  "so",
+                  "angri"
+                ]
+              },
+              {
+                "intent": "emotions.negative",
+                "tokens": [
+                  "i",
+                  "m",
+                  "realli",
+                  "upset"
+                ]
+              },
+              {
+                "intent": "greetings.bye",
+                "tokens": [
+                  "goodby",
+                  "for",
+                  "now"
+                ]
+              },
+              {
+                "intent": "greetings.bye",
+                "tokens": [
+                  "bye",
+                  "bye",
+                  "take",
+                  "care"
+                ]
+              }
+            ],
+            "features": {
+              "i": 8,
+              "feel": 3,
+              "great": 1,
+              "am": 1,
+              "so": 4,
+              "happi": 1,
+              "right": 1,
+              "now": 2,
+              "this": 2,
+              "is": 2,
+              "amaz": 1,
+              "m": 5,
+              "excit": 1,
+              "glad": 1,
+              "terribl": 1,
+              "down": 1,
+              "frustrat": 1,
+              "angri": 1,
+              "realli": 1,
+              "upset": 1,
+              "goodby": 1,
+              "for": 1,
+              "bye": 2,
+              "take": 1,
+              "care": 1
+            },
+            "isEditing": false,
+            "className": "BrainNLU",
+            "classifier": {
+              "className": "BrainClassifier",
+              "settings": {
+                "language": "en",
+                "useNoneFeature": true,
+                "config": {
+                  "activation": "leaky-relu",
+                  "hiddenLayers": [],
+                  "iterations": 20000,
+                  "learningRate": 0.7,
+                  "errorThresh": 0.00005,
+                  "momentum": 0.5,
+                  "deltaErrorThresh": 0.000001,
+                  "maxDecimals": 9,
+                  "leakyReluAlpha": 0.08,
+                  "timeout": 120000
+                }
+              },
+              "labels": [],
+              "network": {
+                "sizes": [
+                  26,
+                  4
+                ],
+                "layers": [
+                  {
+                    "i": {},
+                    "feel": {},
+                    "great": {},
+                    "am": {},
+                    "so": {},
+                    "happi": {},
+                    "right": {},
+                    "now": {},
+                    "this": {},
+                    "is": {},
+                    "amaz": {},
+                    "m": {},
+                    "excit": {},
+                    "glad": {},
+                    "terribl": {},
+                    "down": {},
+                    "frustrat": {},
+                    "angri": {},
+                    "realli": {},
+                    "upset": {},
+                    "goodby": {},
+                    "for": {},
+                    "bye": {},
+                    "take": {},
+                    "care": {},
+                    "nonefeature": {}
+                  },
+                  {
+                    "emotions.positive": {
+                      "bias": 1.690924534,
+                      "weights": {
+                        "i": 4.826584816,
+                        "feel": -1.758744836,
+                        "great": 7.648713589,
+                        "am": 2.06939888,
+                        "so": -1.014419794,
+                        "happi": 2.06939888,
+                        "right": 2.06939888,
+                        "now": 0.794785261,
+                        "this": 2.012482405,
+                        "is": 2.012482405,
+                        "amaz": 6.708006859,
+                        "m": -0.134635568,
+                        "excit": 6.090376854,
+                        "glad": 6.908865929,
+                        "terribl": -4.756890774,
+                        "down": -4.650568008,
+                        "frustrat": -4.695523739,
+                        "angri": -5.297162056,
+                        "realli": -3.186149836,
+                        "upset": -3.186149836,
+                        "goodby": -1.274613619,
+                        "for": -1.274613619,
+                        "bye": -0.568208575,
+                        "take": -0.568208575,
+                        "care": -0.568208575,
+                        "nonefeature": -1.605358601
+                      }
+                    },
+                    "emotions.negative": {
+                      "bias": 0.640283788,
+                      "weights": {
+                        "i": 1.277954578,
+                        "feel": 4.25110817,
+                        "great": -6.062036037,
+                        "am": -1.282077312,
+                        "so": 2.823693991,
+                        "happi": -1.282077312,
+                        "right": -1.282077312,
+                        "now": -1.60277164,
+                        "this": 1.690873384,
+                        "is": 1.690873384,
+                        "amaz": -3.950694323,
+                        "m": 2.346117973,
+                        "excit": -4.264622688,
+                        "glad": -6.863647938,
+                        "terribl": 6.275948048,
+                        "down": 4.037197113,
+                        "frustrat": 5.641568661,
+                        "angri": 5.327848911,
+                        "realli": 4.109342575,
+                        "upset": 4.109342575,
+                        "goodby": -0.320694357,
+                        "for": -0.320694357,
+                        "bye": -0.479175568,
+                        "take": -0.479175568,
+                        "care": -0.479175568,
+                        "nonefeature": -0.892435312
+                      }
+                    },
+                    "greetings.bye": {
+                      "bias": 1.770980462,
+                      "weights": {
+                        "i": -1.48538959,
+                        "feel": -0.389562011,
+                        "great": -0.268537581,
+                        "am": -0.799836457,
+                        "so": -0.941088617,
+                        "happi": -0.799836457,
+                        "right": -0.799836457,
+                        "now": 3.040935755,
+                        "this": -0.650852442,
+                        "is": -0.650852442,
+                        "amaz": -0.554211378,
+                        "m": -0.318734854,
+                        "excit": -0.171749741,
+                        "glad": -0.043076005,
+                        "terribl": -0.098280579,
+                        "down": -0.022743901,
+                        "frustrat": -0.096641205,
+                        "angri": -0.001534967,
+                        "realli": -0.079630226,
+                        "upset": -0.079630226,
+                        "goodby": 3.840771675,
+                        "for": 3.840771675,
+                        "bye": 3.573833942,
+                        "take": 3.573833942,
+                        "care": 3.573833942,
+                        "nonefeature": -1.734110594
+                      }
+                    },
+                    "None": {
+                      "bias": 2.679738254,
+                      "weights": {
+                        "i": -1.547228575,
+                        "feel": -0.756583989,
+                        "great": -0.379104942,
+                        "am": -0.097785383,
+                        "so": -0.450542301,
+                        "happi": -0.097785383,
+                        "right": -0.097785383,
+                        "now": -0.947157502,
+                        "this": -0.975226521,
+                        "is": -0.975226521,
+                        "amaz": -0.708109498,
+                        "m": -0.715000093,
+                        "excit": -0.404448509,
+                        "glad": -0.080282837,
+                        "terribl": -0.355338246,
+                        "down": -0.022140641,
+                        "frustrat": -0.267117113,
+                        "angri": -0.005357008,
+                        "realli": -0.202770963,
+                        "upset": -0.202770963,
+                        "goodby": -0.849372149,
+                        "for": -0.849372149,
+                        "bye": -0.880553126,
+                        "take": -0.880553126,
+                        "care": -0.880553126,
+                        "nonefeature": 9.599858284
+                      }
+                    }
+                  }
+                ],
+                "trainOpts": {
+                  "iterations": 20000,
+                  "errorThresh": 0.00005,
+                  "fixedError": false,
+                  "deltaErrorThresh": 0.000001,
+                  "learningRate": 0.7,
+                  "momentum": 0.5,
+                  "leakyReluAlpha": 0.08,
+                  "maxDecimals": 9,
+                  "log": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "extraSentences": [
+      [
+        "en",
+        "I feel great!"
+      ],
+      [
+        "en",
+        "I am so happy right now!"
+      ],
+      [
+        "en",
+        "This is amazing!"
+      ],
+      [
+        "en",
+        "I’m excited!"
+      ],
+      [
+        "en",
+        "I’m so glad!"
+      ],
+      [
+        "en",
+        "I feel terrible..."
+      ],
+      [
+        "en",
+        "I’m feeling down."
+      ],
+      [
+        "en",
+        "This is so frustrating."
+      ],
+      [
+        "en",
+        "I’m so angry!"
+      ],
+      [
+        "en",
+        "I’m really upset."
+      ],
+      [
+        "en",
+        "goodbye for now"
+      ],
+      [
+        "en",
+        "bye bye take care"
+      ]
+    ]
+  },
+  "nerManager": {
+    "settings": {},
+    "threshold": 0.8,
+    "builtins": [
+      "Number",
+      "Ordinal",
+      "Percentage",
+      "Age",
+      "Currency",
+      "Dimension",
+      "Temperature",
+      "DateTime",
+      "PhoneNumber",
+      "IpAddress",
+      "Boolean",
+      "Email",
+      "Hashtag",
+      "URL"
+    ],
+    "namedEntities": {}
+  },
+  "slotManager": {},
+  "responses": {
+    "en": {
+      "emotions.positive": [
+        {
+          "response": "I’m so glad to hear that! Keep up the positive energy!"
+        },
+        {
+          "response": "That’s awesome! Keep smiling!"
+        },
+        {
+          "response": "Yay! It’s great to hear that you’re feeling good!"
+        }
+      ],
+      "emotions.negative": [
+        {
+          "response": "I’m sorry you feel that way. I’m here if you want to talk."
+        },
+        {
+          "response": "It’s okay to feel down sometimes. Take care of yourself."
+        },
+        {
+          "response": "I understand. I hope things get better soon!"
+        }
+      ],
+      "greetings.bye": [
+        {
+          "response": "Till next time"
+        },
+        {
+          "response": "See you soon!"
+        }
+      ]
+    }
+  },
+  "actions": {},
+  "utteranceDict": {
+    "?": "help"
+  }
+}
