@@ -1,9 +1,7 @@
 import time
-import random
 import pyttsx3
 import speech
-from spherov2 import scanner
-from spherov2.sphero_edu import SpheroEduAPI
+from spherov2.sphero_edu import SpheroEduAPI, EventType
 from spherov2.types import Color
 from textblob import TextBlob
 import prompts
@@ -12,19 +10,9 @@ import prompts
 tts_engine = pyttsx3.init()
 tts_engine.setProperty('rate', 125) 
 
-def text_to_speech(message):
-    """Use TTS to read the text aloud."""
-    tts_engine.say(message)
-    tts_engine.runAndWait()
-
 # Listen to user input (Placeholder for input system)
 def listen():
-    # commands = [
-    #     "start journal", "I've been feeling really grateful for my family.",
-    #     "I was busy today", "Today was tough.", "terminate"
-    # ]
     return speech.start_listening()
-    # return random.choice(commands)
 
 # Sentiment analysis (Simulated here)
 def analyze_sentiment(user_input):
@@ -38,47 +26,33 @@ def analyze_sentiment(user_input):
     else:
         return "I'm not sure what you mean."
 
-# Determine response based on sentiment
-def determine_response(sentiment):
-    if sentiment == "positive":
-        text_to_speech("I'm glad to hear that! It's always great to enjoy the moment. Would you like to elaborate more on what specific moments made today enjoyable?")
-    elif sentiment == "negative":
-        text_to_speech("Even though today wasn't the best, you always have tomorrow to look forward to. What are you excited for tomorrow?")
-    else:
-        text_to_speech("Thank you for sharing. Journaling is a great way to relax and express ourselves. What are you grateful for today?")
-
 # Main function to start the journaling session
 def start_journaling_session(droid):
     journaling = True
     count = 0
-    max_iterations = 5
 
-    while journaling:# and (count < max_iterations):
+
+    while journaling:
+        lumin = droid.get_luminosity()
+        if lumin['ambient_light'] <= 3:
+            print(droid.get_luminosity)
+            prompts.text_to_speech("sleepy")
+            journaling = False
+            return
+
         user_input = listen()
-        time.sleep(5)
-        ###### add if else to check for specific input #######
+        time.sleep(2)
         if "box breathing" in user_input:
             print("recognize breathing")
-            # text_to_speech("How many repetitions would you like?")
-            # user_input = listen()
             box_breathing(droid, 3)
-        prompts.back_n_forth(max_iterations)
+
+        prompts.back_n_forth(user_input, count)
+
+
+
             
-        ######################################################
-        # sentiment = analyze_sentiment(user_input)
-        # time.sleep(1)
-        # determine_response(sentiment)
-        # time.sleep(1)
 
-        if user_input == "terminate":
-            journaling = False
-            text_to_speech("Thanks for journaling with me. Goodbye!")
-
-        # count += 1
-        # if count >= max_iterations and journaling:
-        #     text_to_speech("Ending session to prevent infinite loop in prototype.")
-        #     journaling = False
-
+        count +=1
         time.sleep(1)
 
 def set_matrix(matrix, droid):
@@ -111,25 +85,25 @@ pattern = [
 def box_breathing(droid, reps):
     # orient
     droid.set_front_led(Color(255, 255, 255))
-    text_to_speech("Please place me in front of my to your left, with the LED pointing right")
+    prompts.text_to_speech("Please place me in front of my to your left, with the LED pointing right")
     time.sleep(3)
 
     for x in range(reps):
         # breathe in    
-        text_to_speech("Breathe in")
+        prompts.text_to_speech("Breathe in")
         droid.set_front_led(Color(0, 0, 0))
         droid.set_heading(0)
         droid.set_speed(40)
         set_lines(droid, True)
         # time.sleep(4)
         # hold
-        text_to_speech("Hold")
+        prompts.text_to_speech("Hold")
         droid.set_front_led(Color(173, 216, 230))
         droid.set_back_led(Color(173, 216, 230))
         droid.set_speed(0)
         time.sleep(4)
         # breathe out
-        text_to_speech("Breathe out")
+        prompts.text_to_speech("Breathe out")
         droid.set_front_led(Color(0, 0, 0))
         droid.set_back_led(Color(0, 0, 0))
         droid.set_heading(180)
@@ -137,35 +111,25 @@ def box_breathing(droid, reps):
         set_lines(droid, False)
         # time.sleep(4)
         # hold
-        text_to_speech("Hold")
+        prompts.text_to_speech("Hold")
         droid.set_front_led(Color(173, 216, 230))
         droid.set_back_led(Color(173, 216, 230))
         droid.set_speed(0)
         time.sleep(4)
-    
 
+def on_charging(droid):
+    droid.set_main_led(Color(6, 0, 255))
+    prompts.text_to_speech('charging')
     
+    time.sleep(1)
+    prompts.text_to_speech('remove me from my charger')
 
 # Program to start
 def start_program(toy):
-    # Find toy and connect
-    # toy = scanner.find_toy()
-    with SpheroEduAPI(toy) as droid:
-        # Set LED and matrix animation as a startup effect
-        droid.set_main_led(Color(r=0, g=0, b=0))
-        # droid.set_matrix_fill(0, 0, 3, 3, Color(r=255, g=0, b=0))
-        
-        # droid.set_matrix_line(0, 0, 0, 7, Color(173, 216, 230))
-        # droid.set_matrix_character()
-        # box_breathing(droid)
-        
-        # set_matrix(pattern, droid)
-        # text_to_speech("Robot connected, beginning journaling session!")
-        # time.sleep(1)
-
-        # # Start the journaling session
-        # text_to_speech("What do you want to talk about today? How are you feeling?")
-        start_journaling_session(droid)
+  with SpheroEduAPI(toy) as droid:
+      # Set LED and matrix animation as a startup effect
+      droid.set_main_led(Color(r=0, g=0, b=0))
+      start_journaling_session(droid)
 
 # Run the program
 if __name__ == "__main__":

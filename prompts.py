@@ -9,12 +9,6 @@ import random
 tts_engine = pyttsx3.init()
 tts_engine.setProperty('rate', 125) 
 
-def listen():
-    # commands = [
-    #     "start journal", "I've been feeling really grateful for my family.",
-    #     "I was busy today", "Today was tough.", "terminate"
-    # ]
-    return speech.start_listening()
 
 def text_to_speech(message):
     """Use TTS to read the text aloud."""
@@ -47,7 +41,7 @@ def prompt(sentiment, count):
      "You're radiating positivity today - keep it up!",
      "That's so inspiring-thank you for sharing such a lovely thought!",
      "This is a great reflection",
-     "Your mindset is inspiring"
+     "Your mind set is inspiring"
     ]
 
     negative_response = ["Your feelings are valid, and it's great that you're expressing them." ,
@@ -80,6 +74,7 @@ def prompt(sentiment, count):
     ]
 
     if count == 0:
+        text_to_speech("Hello! Let's get started journaling!")
         text_to_speech(neutral_prompts[
             random.randint(0, (len(neutral_prompts) - 1))])
     elif sentiment == "neutral" and count != 0:
@@ -99,23 +94,16 @@ def prompt(sentiment, count):
           random.randint(0, (len(uplifting_prompts) - 1))])
     return
 
-def back_n_forth(max_iterations):
-    user_input = listen()
+def back_n_forth(user_input, count):
 
-    count = 0
     sentiment = analyze_sentiment(user_input)
+    print(sentiment)
     time.sleep(1)
     prompt(sentiment, count)
     time.sleep(1)
 
     if user_input == "terminate":
-        journaling = False
         text_to_speech("Thanks for journaling with me. Goodbye!")
-
-    count += 1
-    if count >= max_iterations and journaling:
-        text_to_speech("Ending session to prevent infinite loop in prototype.")
-        journaling = False
 
     time.sleep(1)
     return

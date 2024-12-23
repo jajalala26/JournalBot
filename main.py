@@ -22,7 +22,8 @@ def main():
     SPHERO_ADDRESS_2 = "304EFFEF-1EEF-7515-112F-B54A11AAEE08" # Michael's sphero
     SPHERO_ADDRESS_3 = "E614CA17-73A4-1989-260D-0085379D73E9" # Michael's sphero?
     SPHERO_ADDRESS_4 = "121B52A1-0684-8A2A-149A-787D01EFD952" # Dan's sphero?
-    toy = bluetooth.select_sphero(SPHERO_ADDRESS_3)
+    SPHERO_ADDRESS_5 = "25526292-10B1-EA51-4109-2C5CB8157B0C" #Jared's
+    toy = bluetooth.select_sphero(SPHERO_ADDRESS_5)
     
     if toy != None:
         # run(toy)
